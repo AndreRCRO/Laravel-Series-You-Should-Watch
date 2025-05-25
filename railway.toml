@@ -1,11 +1,14 @@
 [build]
 builder = "nixpacks"
-buildCommand = "composer install --no-dev --no-interaction --optimize-autoloader"
+buildCommand = "composer install"
 
 [deploy]
 startCommand = "php artisan serve --host 0.0.0.0 --port $PORT"
 healthcheckPath = "/"
 healthcheckTimeout = 100
+
+[phases.setup]
+nixPkgs = ["php81", "php81Extensions.sqlite3"]
 
 [env]
 APP_ENV = "production"
